@@ -8,25 +8,66 @@
 </head>
 <body>
     <style>
-        .first{
-            background-color: teal;
-            color: white;
-            padding: 20px;
+        img{
+            width: 250px;
+            height: 250px; 
+            border-radius: 50%;
+            object-fit: cover;
+            animation-name: rotor;
+            animation-duration: 5s;
+            animation-timing-function: linear;
+            animation-direction: alternate-reverse;
+            animation-iteration-count: infinite;
         }
-        #firster{
-            background: maroon;
+/* 
+        @keyframes rotor{
+            0%{
+                transform: rotateY(0deg);
+            }
+            50%{
+                transform: rotateY(180deg);
+
+            }
+            100%{
+                transform: rotateY(360deg)
+
+            }
+        } */
+
+        .Mymy{
+            background-color: dodgerblue;
+            padding: 20px;
         }
     </style>
     <script>
-        const div = document.createElement('div')
-        // console.log(div)
-        div['innerHTML'] = 'I hate school'
-        div.classList.add('first')
-        // div.id = 'firster'
-        div.setAttribute('id', 'firster')
+        // const div = document.createElement('div')
+        // // console.log(div)
+        // div['innerHTML'] = `
+        //     <div class='img'>
+        //         <img src='R1.jpg' alt='angry duck'>
+        //     </div>
+        // `
+        // div.classList.add('first')
+        // // div.id = 'firster'
+        // div.setAttribute('id', 'firster')
         
+        // body = document.querySelector('body')
+        // body.append(div)
+
+        // p = document.createElement('p')
+        // p.innerText = 'The text'
+        // body.insertBefore(p, div)
+
+        let section = document.createElement('section')
+        section['innerHTML'] = `
+        <section class='Mymy'>
+            <img src='R1.jpg'>
+            Hello World
+            </section>
+        `
+
         body = document.querySelector('body')
-        body.append(div)
+        body.append(section)
     </script>
 </body>
 </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='./calc.css'>
+</head>
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            buttons = document.querySelectorAll('.click')
+            buttons.forEach((button) => {
+                button.onclick = (event) => {
+                    clicked = event.target
+                    value = clicked.innerHTML
+                    
+                    screen = document.querySelector('.screen')
+                    screen.innerHTML += value
+                }
+            })
+
+            equal = document.querySelector('.equal')
+            equal.onclick = (event) => {
+                screen = document.querySelector('.screen')
+                toEval = eval(screen.innerHTML)
+                screen.innerHTML = toEval
+            }
+
+            del = document.querySelector('.del')
+            del.onclick = () => {
+                let display = document.querySelector('.screen')
+                
+                inner = display.innerHTML
+                
+                newVal = inner.slice(0, inner.length-1)
+            
+                display.innerHTML = newVal
+            }
+        })
+    </script>
+    <div class="container">
+        <div class="screen">
+
+        </div>
+        <button class="click">0</button>
+        <button class="click">1</button>
+        <button class="click">2</button>
+        <button class="click">3</button>
+        <button class="click">4</button>
+        <button class="click">5</button>
+        <button class="click">6</button>
+        <button class="click">7</button>
+        <button class="click">8</button>
+        <button class="click">9</button>
+        <button class="click">.</button>
+
+        <button class="click">*</button>
+        <button class="click">+</button>
+        <button class="click">/</button>
+        <button class="click">%</button>
+        <button class="click">-</button>
+
+        <button class="equal">=</button>
+        <button class="del">del</button>
+        <a href='Calculator.html'>
+        <button class="clear">
+           Clear
+        </button>
+    </a>
+    </div>
+</body>
+</html>

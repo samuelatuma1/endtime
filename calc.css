@@ -1,0 +1,36 @@
+.container {
+  display: -ms-grid;
+  display: grid;
+  color: white;
+  -ms-grid-columns: (18%)[5];
+      grid-template-columns: repeat(5, 18%);
+  grid-gap: 12px;
+}
+
+.container .screen {
+  grid-column: span 5;
+  height: 60px;
+  padding: 10px;
+  text-align: right;
+  background-color: black;
+  border-radius: 20px;
+}
+
+.container button {
+  background-color: dodgerblue;
+  padding: 25px 0px 25px 0px;
+  border: 0px solid transparent;
+  border-radius: 20px;
+  font-size: bolder;
+  color: white;
+  font-family: verdana;
+  -webkit-box-shadow: 0px 2px 15px 0px black;
+          box-shadow: 0px 2px 15px 0px black;
+}
+
+.container .clear {
+  -ms-grid-column: 3;
+      grid-column-start: 3;
+  grid-column-end: -1;
+}
+/*# sourceMappingURL=calc.css.map */

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        button{
+            border: 1px solid transparent;
+            color: white;
+            margin: 20px;
+            box-shadow: 0px 3px 15px 0px teal;
+            border-radius: 3px;
+            padding: 5px;
+            background-color: teal;
+        }
+        div{
+            border: 1px solid transparent;
+            color: white;
+            margin: 20px;
+            box-shadow: 0px 3px 15px 0px teal;
+            border-radius: 3px;
+            padding: 5px;
+            background-color: teal;
+            transition: 0.2s ease-in;
+        }
+        div:hover{
+            width: 120%;
+        }
+    </style>
+    <button>Blah Blah Blah</button>  
+    <button>Lorem, ipsum dolor.</button>  
+    <button>Eze, Monsur, Zion, Sam</button>  
+    <div></div>
+
+<script>
+   
+    buttons = document.querySelectorAll('button')
+    buttons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+            btn = event.target
+            text = btn.innerHTML
+            p = document.createElement('p')
+            p.innerText = text
+            div = document.querySelector('div')
+            div.append(p)
+        })
+    })
+
+</script>
+
+    
+
+</body>
+
+</html>

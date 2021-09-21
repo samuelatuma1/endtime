@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="todos"></div>
+    <div class="inputTodo">
+        <input type="text" class="inputtodo">
+        <button class='add'>Add Todo</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if(localStorage.getItem('database')){
+                displayTodo()
+            }
+
+        })
+        let addTodo = document.querySelector('button.add')
+        addTodo.onclick = () => {
+            const text = document.querySelector('.inputtodo').value
+            if(!localStorage.getItem('database')){
+                // create database
+                localStorage.setItem('database', '[]')
+
+                //add text to database
+                addToDataBase(text)
+            }
+            else{
+                addToDataBase(text)
+            }
+            function addToDataBase(text){
+                // get database
+                database = JSON.parse(localStorage.getItem('database'))
+                database.push(text)
+                //update database
+                dataToString = JSON.stringify(database)
+                localStorage.setItem('database', dataToString)
+            }
+            displayTodo()
+        }
+        function displayTodo(){
+            //get database
+            arr = JSON.parse(localStorage.getItem('database'))
+            todos = document.querySelector('.todos')
+            todos.innerHTML = ''
+            //add items to dom
+            arr.forEach(text => {
+                li = document.createElement('li')
+                li.innerText = text
+
+            // get todos
+            todos = document.querySelector('.todos')
+            todos.append(li)
+            })
+
+        }
+    </script>
+</body>
+</html>

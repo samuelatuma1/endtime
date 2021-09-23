@@ -56,6 +56,62 @@ body .finds:hover, body .friends:hover {
   padding: 15px;
 }
 
+body .chatHolder {
+  width: 100%;
+  max-height: 150px;
+  overflow-y: scroll;
+}
+
+body .chatHolder:hover {
+  -webkit-box-shadow: 0px 0px 0px 0px transparent;
+          box-shadow: 0px 0px 0px 0px transparent;
+}
+
+body .chatHolder .myMsg, body .chatHolder .otherMsg {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding: 5px;
+  width: 100%;
+}
+
+body .chatHolder .myMsg:hover, body .chatHolder .otherMsg:hover {
+  -webkit-box-shadow: 0px 0px 0px 0px transparent;
+          box-shadow: 0px 0px 0px 0px transparent;
+}
+
+body .chatHolder .myMsg div, body .chatHolder .otherMsg div {
+  width: 50%;
+  padding: 15px;
+  background-color: bisque;
+}
+
+body .chatHolder .myMsg div {
+  border-bottom-right-radius: 0px;
+}
+
+body .chatHolder .otherMsg {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+body .chatHolder .otherMsg div {
+  background-color: black;
+  color: white;
+  border-top-left-radius: 0px;
+}
+
 body .friendsStatus {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -69,8 +125,10 @@ body .friendsStatus {
       align-content: center;
   position: fixed;
   height: 100vh;
+  overflow-y: scroll;
   width: 100vw;
   pointer-events: initial;
+  z-index: 2;
   opacity: 1;
   top: 0;
   left: 0;
@@ -78,7 +136,7 @@ body .friendsStatus {
 }
 
 body .friendsStatus div {
-  width: 80%;
+  width: 85%;
   background-color: white;
   padding: 30px;
   text-align: center;
@@ -86,8 +144,6 @@ body .friendsStatus div {
 }
 
 body .friendsStatus div:hover {
-  -webkit-box-shadow: 0px 1px 12px 0px black;
-          box-shadow: 0px 1px 12px 0px black;
   border-radius: 25px;
 }
 
@@ -180,5 +236,12 @@ body #closeModal {
 
 .show {
   display: block;
+}
+
+.chatInput {
+  width: 70%;
+  padding: 8px;
+  border-radius: 20px;
+  border: 1px solid #e6e4e4;
 }
 /*# sourceMappingURL=chat.css.map */

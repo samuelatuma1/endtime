@@ -144,7 +144,7 @@
                 if(user.username === friendsName){
                     const status = user['status'] || `No status from ${friendsName} yet`
 
-                    // come back here
+                    
                     const div = document.createElement('div')
                     div.classList.add('friendsStatus')
                     div.innerHTML = `
@@ -160,6 +160,136 @@
                     button.classList.add('closeModal')
                     button.innerText = 'Close'
                     button.onclick = hideModal
+
+                    // show chat with friend
+                    if(!localStorage.getItem('chats')){
+                        localStorage.setItem('chats', '[]')
+                    }
+
+                    // create a consistent chatName for every two chats
+                    // chats = [{chatName: user3_user4,  talks: [ [user3, Hello user4], [user4, hello user3] ]}]
+                    let chatName = me.username > user.username ? `${user.username}_${me.username}` : `${me.username}_${user.username}`
+                    let foundChat = null
+                    let convo = null
+                    let chats = JSON.parse(localStorage.getItem('chats'))
+                    for(let chat of chats){
+                        if(chat.chatName === chatName){
+                            foundChat = chats.indexOf(chat)
+                            convo = chats[foundChat]
+                            
+                        }
+                    }
+                    // if chat exists
+                    if(convo){
+                        messageDiv = document.createElement('div')
+                        messageDiv.classList.add('chatHolder')
+                        let talks = convo.talks
+                        talks.forEach(talk => {
+                            divChat = document.createElement('div')
+                            let divClass =  talk[0] == me.username ? 'myMsg' : 'otherMsg'
+                            divChat.classList.add(divClass)
+                            divChat.innerHTML = `
+                                <div>
+                                    ${talk[1]}
+                                </div>
+                            `
+                            messageDiv.append(divChat)
+                        })
+                        div.append(messageDiv)
+
+
+
+                    }
+                    //else
+                    else{
+                        // create convo and add to chats
+                        convo = {
+                            'chatName': chatName,
+                            'talks': []
+                        }
+                        // chats[foundChat] = convo
+                        chats.push(convo)
+                        localStorage.setItem('chats', JSON.stringify(chats))
+                        console.log(JSON.parse(localStorage.getItem('chats')))
+                    }
+
+
+                    // createMessage box
+                    const chatInput = document.createElement('input')
+                    chatInput.classList.add('chatInput')
+                    chatInput.placeholder = 'send a friendly hello';
+                    const chatButton = document.createElement('button')
+                    chatButton.innerText = 'sayHi'
+                    chatButton.classList.add('chatButton')
+
+                    // send Message 
+                    chatButton.onclick = (e) => {
+                        text = document.querySelector('.chatInput').value
+                        if(verifyText(text)){
+                            let chatName = me.username > user.username ? `${user.username}_${me.username}` : `${me.username}_${user.username}`
+                            let foundChat = null
+                            let convo = null
+                            let chats = JSON.parse(localStorage.getItem('chats'))
+                            for(let chat of chats){
+                                if(chat.chatName === chatName){
+                                    foundChat = chats.indexOf(chat)
+                                    convo = chats[foundChat]
+                                    
+                                }
+                            }
+                            // if chat exists
+                            if(convo){
+                                let talks = convo.talks
+                                let message =  [me.username, text]
+                                convo.talks.push(message)
+                                chats.push(convo)
+                                localStorage.setItem('chats', JSON.stringify(chats))
+                                console.log(JSON.parse(localStorage.getItem('chats')))
+
+                            }
+                            //else
+                            else{
+                                // create convo and add to chats
+                                convo = {
+                                    'chatName': chatName,
+                                    'talks': [[me.username, text]]
+                                }
+                                // chats[foundChat] = convo
+                                chats.push(convo)
+                                localStorage.setItem('chats', JSON.stringify(chats))
+                                console.log(JSON.parse(localStorage.getItem('chats')))
+                            }
+
+                            // append new message to chats
+                            messageDiv = document.querySelector('.chatHolder') || document.createElement('div')
+                            console.log(messageDiv.classList)
+                            messageDiv.classList.add('chatHolder')
+                            console.log(messageDiv)
+                            //create Chat box
+
+                            divChat = document.createElement('div')
+                            let divClass =  'myMsg'
+                            divChat.classList.add(divClass)
+                            divChat.innerHTML = `
+                                <div>
+                                    ${text}
+                                </div>
+                            `
+                            messageDiv.append(divChat)
+                            div.insertBefore(messageDiv, divForChat)
+                            chatInput.value = ''
+                            
+                        }
+                        else{
+                            return
+                        }
+                    }
+
+                    let divForChat = document.createElement('div')
+                    divForChat.appendChild(chatInput);
+                    divForChat.appendChild(chatButton);
+                    div.append(divForChat)
+
                     div.append(button)
                     document.body.insertBefore(div, friends)
                 }

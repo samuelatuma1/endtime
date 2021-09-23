@@ -102,7 +102,7 @@ body{
         @include flexStuff(center);
         align-content: center;
         position: fixed;
-        height: 100vh;
+        min-height: 100vh;
         overflow-y: scroll;
         width: 100vw;
         pointer-events: initial;

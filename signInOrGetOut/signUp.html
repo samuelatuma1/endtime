@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            function addUser(user, pass){
+                // convert local storage to array
+                users = JSON.parse(localStorage.getItem('users'))
+
+                //loop through to find if user already exists
+                for(account of users){
+                    const username = account.username
+                    if(username == user){
+                        alert('user already exists, please try again')
+                        return
+                    }
+                }
+                //if user does not exist, create a user profile for user
+                const userprofile = {
+                    "username": user,
+                    "password": pass
+                }
+
+                // update localstorage with user added
+                users.push(userprofile)
+                localStorage.setItem('users', JSON.stringify(users))
+                alert(`${user} created`)
+            }
+            let create = document.querySelector('#create')
+            create.onclick = () => {
+                const username = document.querySelector('#username').value
+
+                const password = document.querySelector('#password').value
+                
+                if(localStorage.getItem('users')){
+                    addUser(username, password)
+                }
+                else{
+                    localStorage.setItem('users', '[]')
+                    addUser(username, password)
+                }
+                
+                
+            }
+        })
+    </script>
+    <div>
+        <input id='username' placeholder='username please'>
+        <input id='password' type='password' placeholder='password please'>
+        <button id='create'>Create account</button>
+    </div>
+</body>
+</html>

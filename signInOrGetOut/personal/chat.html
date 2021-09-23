@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='chat.css'>
+</head>
+<body>
+    <h3 class='welcome'>Welcome <span></span> &nbsp; &nbsp;</h3>
+
+    <script>
+        document.body.onload = () => {
+        if(!sessionStorage.getItem('user')){
+            // alert('You are not signed in')
+            document.body.innerHTML = `
+                Please, sign in to gain access to chats
+        <a href='./signIn.html'><button>Sign In</button></a>
+
+            `
+        }
+        document.querySelector('.welcome span').innerText = sessionStorage.getItem('user')
+
+        var allUsers = JSON.parse(localStorage.getItem('users'))
+        const me = allUsers.filter(user => user.username === sessionStorage.getItem('user'))[0]
+
+        let find = document.querySelector('#find')
+
+
+        //add to friends list
+        function addToFriends(e){
+            const btn = e.target
+            const parent = btn.parentElement
+            
+            // get friend Name to add
+            const friendName = parent.querySelector('.friendName').innerText
+            
+            //add Friend to friend list
+            const allUsers = JSON.parse(localStorage.getItem('users'))
+            console.log(allUsers)
+
+            for(user of allUsers){
+                if( user.username === sessionStorage.getItem('user')){
+                    user.friends.push(friendName)
+                localStorage.setItem('users', JSON.stringify(allUsers))
+                alert(friendName + ' added to friends list')
+                window.location.reload()
+
+                }
+            }
+
+
+        }
+
+
+        find.onclick = () => {
+            // clear finds
+            
+            const finds = document.querySelector('.finds')
+            finds.innerHTML = ''
+            // find all friends
+
+            // find all users
+            allUsers = JSON.parse(localStorage.getItem('users'))
+            const usernames  = allUsers.map(user => user.username)
+
+            // target current user
+            
+            
+            // get all potential friends
+            const potential = usernames.filter(user => !me.friends.includes(user))
+
+            // reduce potential friends to a maximum of 10
+            const maxSearch = potential.length < 5 ? potential.length : 5
+            let potentialFriends = potential.slice(0, maxSearch).filter(name => !(name == me.username))
+            
+            
+            // add all potential friends to dom
+            potentialFriends.forEach(friend => {
+                const div = document.createElement('div')
+                div.innerHTML = `
+                    <div class="img">
+                        <img src="./RunoStudent.PNG" alt="friend">
+                    </div>
+                    <div class="friendName">
+                        ${friend}
+                    </div>
+                `
+                let btn = document.createElement('button')
+                btn.classList.add('addFriend')
+                btn.innerHTML = 'Add Friend'
+                btn.onclick = addToFriends
+                div.append(btn)
+                finds.appendChild(div)
+            })
+
+            // show toggle button
+            const toggleDisplay = document.querySelector('button.toggleDisplay')
+            
+            toggleDisplay.classList.toggle('hide');
+            
+        }
+
+        
+
+        //toggle add Friends display
+        const toggleDisplay = document.querySelector('button.toggleDisplay')
+        toggleDisplay.onclick = (e) => {
+            const finds = document.querySelector('.finds')
+            finds.classList.toggle('hide')
+        }
+
+       // view friend's status 
+        const friends = document.querySelector('.friends')
+        const myFriends = me.friends
+        myFriends.forEach(friend => {
+                const div = document.createElement('div')
+                div.innerHTML = `
+                    <div class="img">
+                        <img src="./RunoStudent.PNG" alt="friend">
+                    </div>
+                    <div class="friendsName">
+                        ${friend}
+                    </div>
+                `
+                let btn = document.createElement('button')
+                btn.classList.add('viewProfile')
+                btn.innerHTML = 'view Profile'
+                btn.onclick = viewProfile
+                div.append(btn)
+                friends.appendChild(div)
+            })
+        
+        // view Friend's profile
+        function viewProfile(e){
+            
+            // get Friend's info
+            const parent = e.target.parentElement
+            const friendsName = parent.querySelector('.friendsName').innerText
+            
+            //get friend's status
+            allUsers.forEach(user => {
+                if(user.username === friendsName){
+                    const status = user['status'] || `No status from ${friendsName} yet`
+
+                    // come back here
+                    const div = document.createElement('div')
+                    div.classList.add('friendsStatus')
+                    div.innerHTML = `
+                    <div class="img">
+                        <img src="samuel1.png" alt="User image">
+                    </div>
+                    <div class="text">
+                        ${status}
+                    </div>
+                    
+                    `
+                    button = document.createElement('button')
+                    button.classList.add('closeModal')
+                    button.innerText = 'Close'
+                    button.onclick = hideModal
+                    div.append(button)
+                    document.body.insertBefore(div, friends)
+                }
+            })
+
+        }
+        function hideModal(e){
+            const modalToHide = e.target.parentElement
+            modalToHide.setAttribute('id', 'closeModal')
+        }
+
+        // update status
+        
+            const share = document.querySelector('#share')
+            
+            share.onclick = (e) => {
+                // get message
+                const text = document.querySelector('#bottom input').value
+                if(verifyText(text)){
+                    updateStatus(text)
+
+                }
+                else{
+                    alert('Cannot share message. Kindly revisit')
+                }
+            }
+
+            function verifyText(text){
+                if(text.length < 2){
+                    return
+                }
+                const firstVal = text[0]
+                let identical = true
+                for(char of text){
+                    if(char !== firstVal){
+                        identical = false
+                    }
+                }
+                return !identical
+            }
+
+            function updateStatus(text){
+                const myUserName = me.username
+                allUsers.forEach(user => {
+                    if(user.username === myUserName){
+                        user['status'] = text
+                        uploaded = JSON.stringify(new Date())
+                        user['uploaded'] = uploaded
+                        localStorage.setItem('users', JSON.stringify(allUsers))
+
+                        alert('status Uploaded')
+                        allUsers = JSON.parse(localStorage.getItem('users'))
+
+                        console.log(allUsers)
+
+                    }
+                })
+            }
+        
+    }
+    </script>
+    <div class="includeHideBtn">
+        <div class="findFriends">
+            <h3>Your friends are waiting for you.<button id='find'>Find Friends</button></h3>
+            <div class="finds">
+            </div>
+            
+        </div>
+        <button class="toggleDisplay hide">Toggle display</button>
+    </div>
+
+    <div class="friends">
+        <h3>See what your friends are up to</h3>
+    </div>
+
+    
+
+    <div id='bottom'>
+        <input>
+        <button id='share'>Share</button>
+    </div>
+</body>
+</html>

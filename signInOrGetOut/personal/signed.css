@@ -1,0 +1,33 @@
+* {
+  font-family: cursive;
+}
+
+@media screen and (max-width: 640px) {
+  .sign {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .sign input {
+    width: 90%;
+    margin-bottom: 20px;
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid #bdbcbc;
+  }
+  .sign button {
+    background-color: black;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    color: white;
+    padding: 7px;
+    cursor: pointer;
+    margin: 10px;
+  }
+}
+/*# sourceMappingURL=signed.css.map */

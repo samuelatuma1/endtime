@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='signed.css'>
+
+    <title>Document</title>
+</head>
+<body>
+    <div class='sign'>
+        <input id='username' placeholder='username please'>
+        <input id='password' type='password' placeholder='password please'>
+        <button id='signin'>Sign in</button>
+        <a href='./signUp.html'><button>Sign Up</button></a>
+    </div>
+
+    <script>
+        const signin = document.querySelector('#signin')
+        signin.onclick = (e) => {
+            const username = document.querySelector('#username').value
+
+            const password = document.querySelector('#password').value
+
+            const users = JSON.parse(localStorage.getItem('users'))
+
+            for(user of users){
+                const profile = user.username
+
+                if(username == profile){
+                    pass = user.password
+                    if(pass == password){
+                        // sign user in
+                        alert(`welcome ${profile}`)
+                        sessionStorage.setItem('user', username)
+                        window.location.href = './chat.html'
+
+                    }
+                    else{
+                        alert('you fraud')
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

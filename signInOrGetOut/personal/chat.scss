@@ -1,0 +1,146 @@
+$font : cursive;
+@mixin flexStuff($just){
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: $just;
+}
+body{
+    z-index: 1;
+    margin: 0;
+    .welcome{
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 2;
+        margin: 0;
+        text-align: right;
+        padding: 15px;
+        
+        background-color: bisque;
+    }
+    font-family: cursive;
+    button{
+        background-color: black;
+        border: 1px solid transparent;
+        border-radius: 3px;
+        color: white;
+        padding: 7px;
+        cursor: pointer;
+        // margin: 10px;
+    }
+
+    #bottom{
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        padding-bottom: 10px;
+        input{
+            width: 80%;
+            padding: 7px;
+            border: 1px solid rgb(192, 189, 189);
+        }
+        
+    }
+    
+    .finds, .friends{
+        margin-top: 30px;
+        box-shadow: 0px 1px 12px 0px rgb(208, 208, 208);  
+        border-radius: 5px;
+        padding: 20px; 
+        transition: 0.3s ease-in;
+        &:hover{
+        border-radius: 20px;
+        box-shadow: 0px 1px 12px 0px rgb(130, 129, 129);  
+            padding: 15px;
+        }
+    }
+
+    
+    .friendsStatus{
+        @include flexStuff(center);
+        align-content: center;
+        position: fixed;
+        height: 100vh;
+        width: 100vw;
+        pointer-events: initial;
+        opacity: 1;
+        top: 0;
+        left: 0;
+        background-color: rgba($color: #000000, $alpha: 0.8);
+        // margin: 40px 0px 50px 0px;
+        div{
+            width: 80%;
+            background-color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+
+            &:hover{
+                box-shadow: 0px 1px 12px 0px black;
+            border-radius: 25px;
+
+            }
+        }
+        .img{
+        @include flexStuff(center);
+            img{
+                width: 250px;
+                height: 250px;
+                object-fit: cover;
+                display: block;
+                border-radius: 50%;
+            }
+        }
+    }
+    #closeModal{
+        pointer-events: none;
+        opacity: 0;
+        
+    }
+}
+.finds > div, .friends > div{
+    @include flexStuff(space-evenly);
+    margin-bottom: 10px;
+    transition: 0.3s ease-in;
+    padding: 10px;
+    border: 1px solid rgb(228, 226, 226);
+    cursor: pointer;
+    &:hover{
+        width: 102%;
+        border-radius: 20px;
+
+        background-color: rgb(237, 236, 236);
+    }
+
+}
+.finds > div > div, .friends > div > div{
+    width: 30%;
+    @include flexStuff(flex-start);
+    align-items: center;
+    img{
+        display: block;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        
+    }
+    
+}
+.includeHideBtn {
+    position: relative;
+    min-height: 50px;
+    .toggleDisplay{
+       position: absolute;
+       bottom : -15px;
+        left: 45%;
+         
+    }
+}
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}

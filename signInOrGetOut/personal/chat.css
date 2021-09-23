@@ -1,0 +1,184 @@
+body {
+  z-index: 1;
+  margin: 0;
+  font-family: cursive;
+}
+
+body .welcome {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  margin: 0;
+  text-align: right;
+  padding: 15px;
+  background-color: bisque;
+}
+
+body button {
+  background-color: black;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  color: white;
+  padding: 7px;
+  cursor: pointer;
+}
+
+body #bottom {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  padding-bottom: 10px;
+}
+
+body #bottom input {
+  width: 80%;
+  padding: 7px;
+  border: 1px solid #c0bdbd;
+}
+
+body .finds, body .friends {
+  margin-top: 30px;
+  -webkit-box-shadow: 0px 1px 12px 0px #d0d0d0;
+          box-shadow: 0px 1px 12px 0px #d0d0d0;
+  border-radius: 5px;
+  padding: 20px;
+  -webkit-transition: 0.3s ease-in;
+  transition: 0.3s ease-in;
+}
+
+body .finds:hover, body .friends:hover {
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 1px 12px 0px #828181;
+          box-shadow: 0px 1px 12px 0px #828181;
+  padding: 15px;
+}
+
+body .friendsStatus {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  pointer-events: initial;
+  opacity: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+body .friendsStatus div {
+  width: 80%;
+  background-color: white;
+  padding: 30px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+body .friendsStatus div:hover {
+  -webkit-box-shadow: 0px 1px 12px 0px black;
+          box-shadow: 0px 1px 12px 0px black;
+  border-radius: 25px;
+}
+
+body .friendsStatus .img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body .friendsStatus .img img {
+  width: 250px;
+  height: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+  border-radius: 50%;
+}
+
+body #closeModal {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.finds > div, .friends > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  margin-bottom: 10px;
+  -webkit-transition: 0.3s ease-in;
+  transition: 0.3s ease-in;
+  padding: 10px;
+  border: 1px solid #e4e2e2;
+  cursor: pointer;
+}
+
+.finds > div:hover, .friends > div:hover {
+  width: 102%;
+  border-radius: 20px;
+  background-color: #edecec;
+}
+
+.finds > div > div, .friends > div > div {
+  width: 30%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.finds > div > div img, .friends > div > div img {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.includeHideBtn {
+  position: relative;
+  min-height: 50px;
+}
+
+.includeHideBtn .toggleDisplay {
+  position: absolute;
+  bottom: -15px;
+  left: 45%;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+/*# sourceMappingURL=chat.css.map */
